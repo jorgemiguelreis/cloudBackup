@@ -18,16 +18,16 @@ Assim, o utilizador deverá efetuar um registo no serviço, assim como associar 
 
 ### Web Services
 
-  #### Google Drive Android API:
-    - Autenticação e Identificação: Google Account;
-    - Serviços: upload e download de ficheiros para serviço cloud GDrive.
+#### Google Drive Android API:
+  - Autenticação e Identificação: Google Account;
+  - Serviços: upload e download de ficheiros para serviço cloud GDrive.
 
-  #### Servidor de Aplicação:
-    - Registo e Autenticação;
-    - Base de dados da aplicação:
-      - Armazenamento de dados dos utilizadores e respectiva informação de backups;
-      - Armazenamento de informação relativa a pastas partilhadas;
-    - Envio de notificações (assíncronas) de alterações em pastas partilhadas. Caso o dispositivo não se encontre disponível, a notificação é enviada após login.
+#### Servidor de Aplicação:
+  - Registo e Autenticação;
+  - Base de dados da aplicação:
+    - Armazenamento de dados dos utilizadores e respectiva informação de backups;
+    - Armazenamento de informação relativa a pastas partilhadas;
+  - Envio de notificações (assíncronas) de alterações em pastas partilhadas. Caso o dispositivo não se encontre disponível, a notificação é enviada após login.
 
 
 ### Target Plataforms
