@@ -69,13 +69,15 @@ public class MessageBox extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
 
+        String[] reqCols = new String[]{"_id", "address", "body", "person", "date", "type", "read", "status"};
+
         if (v == btnInbox) {
 
             // Create Inbox box URI
             Uri inboxURI = Uri.parse("content://sms/inbox");
 
             // List required columns
-            String[] reqCols = new String[]{"_id", "address", "body", "person", "date", "type", "read", "status"};
+            //String[] reqCols = new String[]{"_id", "address", "body", "person", "date", "type", "read", "status"};
 
             // Get Content Resolver object, which will deal with Content
             // Provider
@@ -90,6 +92,19 @@ public class MessageBox extends Activity implements OnClickListener {
                     R.id.lblMsg, R.id.lblNumber, R.id.lblperson, R.id.lbldate, R.id.lbltype, R.id.lblread, R.id.lblstatus}
             );
             lvMsg.setAdapter(adapter);
+
+            c.moveToFirst();
+            String body = c.getString(c.getColumnIndex("body"));
+            String date = c.getString(c.getColumnIndex("date"));
+            String address = c.getString(c.getColumnIndex("address"));
+            Utils.writeToFile("mensagens",Utils.getContactName(this,address)+", "+body+", "+Utils.millisToDate(Long.parseLong(date))+"\n");
+          /*  while(c.moveToNext()) {
+                String body = c.getString(c.getColumnIndex("body"));
+                String date = c.getString(c.getColumnIndex("date"));
+                String address = c.getString(c.getColumnIndex("address"));
+
+                Utils.writeToFile("mensagens",address+", "+body+", "+Utils.millisToDate(Long.parseLong(date))+"\n");
+            }*/
 
             /*
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.list, cursor,
@@ -118,7 +133,7 @@ adapter.setViewBinder(new ViewBinder() {
             Uri sentURI = Uri.parse("content://sms/sent");
 
             // List required columns
-            String[] reqCols = new String[]{"_id", "address", "body"};
+            //String[] reqCols = new String[]{"_id", "address", "body"};
 
             // Get Content Resolver object, which will deal with Content
             // Provider
@@ -129,8 +144,8 @@ adapter.setViewBinder(new ViewBinder() {
 
             // Attached Cursor with adapter and display in listview
             adapter = new SimpleCursorAdapter(this, R.layout.row, c,
-                    new String[]{"body", "address"}, new int[]{
-                    R.id.lblMsg, R.id.lblNumber}
+                    new String[]{"body", "address", "person", "date", "type", "read", "status"}, new int[]{
+                    R.id.lblMsg, R.id.lblNumber, R.id.lblperson, R.id.lbldate, R.id.lbltype, R.id.lblread, R.id.lblstatus}
             );
             lvMsg.setAdapter(adapter);
 
@@ -141,7 +156,7 @@ adapter.setViewBinder(new ViewBinder() {
             Uri draftURI = Uri.parse("content://sms/draft");
 
             // List required columns
-            String[] reqCols = new String[]{"_id", "address", "body"};
+            //String[] reqCols = new String[]{"_id", "address", "body"};
 
             // Get Content Resolver object, which will deal with Content
             // Provider
@@ -152,8 +167,8 @@ adapter.setViewBinder(new ViewBinder() {
 
             // Attached Cursor with adapter and display in listview
             adapter = new SimpleCursorAdapter(this, R.layout.row, c,
-                    new String[]{"body", "address"}, new int[]{
-                    R.id.lblMsg, R.id.lblNumber}
+                    new String[]{"body", "address", "person", "date", "type", "read", "status"}, new int[]{
+                    R.id.lblMsg, R.id.lblNumber, R.id.lblperson, R.id.lbldate, R.id.lbltype, R.id.lblread, R.id.lblstatus}
             );
             lvMsg.setAdapter(adapter);
 

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,10 +16,13 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -26,6 +30,8 @@ import java.util.Date;
  * Created by Reis on 28/05/2014.
  */
 public class Utils {
+
+    static final String mainFolder = "/CloudBackupFolder/";
 
     static public String getContactName(Context context, String phoneNumber) {
         ContentResolver cr = context.getContentResolver();
@@ -58,10 +64,26 @@ public class Utils {
 
     public static void writeToFile(String fileName, String body)
     {
+        /*
+        try {
+            final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + mainFolder );
+
+            if (!dir.exists())
+            {
+                dir.mkdirs();
+            }
+            String path = Environment.getExternalStorageDirectory().getAbsolutePath().toString()+mainFolder;
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(path+fileName+".txt", true)));
+            out.println(body);
+            out.close();
+        } catch (IOException e) {
+            //exception handling left as an exercise for the reader
+        }
+        */
         FileOutputStream fos = null;
 
         try {
-            final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/CloudBackupFolder/" );
+            final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + mainFolder );
 
             if (!dir.exists())
             {
@@ -73,15 +95,24 @@ public class Utils {
             if (!myFile.exists())
             {
                 myFile.createNewFile();
+                fos = new FileOutputStream(myFile);
+                fos.write(body.getBytes());
+            }
+            else
+            {
+                fos = new FileOutputStream(myFile);
             }
 
-            fos = new FileOutputStream(myFile);
 
+
+            fos = new FileOutputStream(myFile);
             fos.write(body.getBytes());
             fos.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
     }
+
 }
