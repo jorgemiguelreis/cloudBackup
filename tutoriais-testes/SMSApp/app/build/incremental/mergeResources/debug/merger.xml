@@ -2,34 +2,34 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res" >
+        <source path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res" >
             <file
                 name="icon"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\drawable-hdpi\icon.png"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\drawable-hdpi\icon.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="icon"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\drawable-ldpi\icon.png"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\drawable-ldpi\icon.png"
                 qualifiers="ldpi"
                 type="drawable" />
             <file
                 name="icon"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\drawable-mdpi\icon.png"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\drawable-mdpi\icon.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="messagebox"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\layout\messagebox.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\layout\messagebox.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="row"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\layout\row.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\layout\row.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\values\strings.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\main\res\values\strings.xml"
                 qualifiers="" >
                 <string name="app_name" >SMSApp
                 </string>
@@ -37,11 +37,11 @@
                 </string>
             </file>
         </source>
-        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\build\res\rs\debug" />
-        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\build\res\generated\debug" />
+        <source path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\build\res\rs\debug" />
+        <source path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\build\res\generated\debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\debug\res" />
+        <source path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\SMSApp\app\src\debug\res" />
     </dataSet>
 
 </merger>

@@ -2,39 +2,39 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res" >
+        <source path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res" >
             <file
                 name="ic_launcher"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\drawable-hdpi\ic_launcher.png"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\drawable-hdpi\ic_launcher.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\drawable-ldpi\ic_launcher.png"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\drawable-ldpi\ic_launcher.png"
                 qualifiers="ldpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\drawable-mdpi\ic_launcher.png"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\drawable-mdpi\ic_launcher.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\drawable-xhdpi\ic_launcher.png"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\drawable-xhdpi\ic_launcher.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="activity_main"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\layout\activity_main.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\layout\activity_main.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="activity_main"
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\menu\activity_main.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\menu\activity_main.xml"
                 qualifiers=""
                 type="menu" />
             <file
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\values\strings.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\values\strings.xml"
                 qualifiers="" >
                 <string name="app_name" >ITCReadSMSExample
                 </string>
@@ -44,7 +44,7 @@
                 </string>
             </file>
             <file
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\values\styles.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\values\styles.xml"
                 qualifiers="" >
 
                 <style
@@ -66,7 +66,7 @@
                 </style>
             </file>
             <file
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\values-v11\styles.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\values-v11\styles.xml"
                 qualifiers="v11" >
 
                 <style
@@ -77,7 +77,7 @@
                 </style>
             </file>
             <file
-                path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\res\values-v14\styles.xml"
+                path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\main\res\values-v14\styles.xml"
                 qualifiers="v14" >
 
                 <style
@@ -88,11 +88,11 @@
                 </style>
             </file>
         </source>
-        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\build\res\rs\debug" />
-        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\build\res\generated\debug" />
+        <source path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\build\res\rs\debug" />
+        <source path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\build\res\generated\debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\debug\res" />
+        <source path="C:\Users\Miao\AndroidStudioProjects\sdis_cloudBackup\tutoriais-testes\AppAndroid\app\src\debug\res" />
     </dataSet>
 
 </merger>

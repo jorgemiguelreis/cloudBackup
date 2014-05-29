@@ -1,5 +1,4 @@
-<!-- From: file:/C:/Users/Reis/Dropbox/Faculdade/2013-2014/2º%20Semestre/SDIS/TP2/AppAndroid/app/src/main/AndroidManifest.xml -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.itcuties.android.apps">
+<!-- From: file:/C:/Users/Miao/AndroidStudioProjects/sdis_cloudBackup/tutoriais-testes/AppAndroid/app/src/main/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.itcuties.android.apps">
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16"/>
     

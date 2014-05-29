@@ -30,6 +30,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class MessageBox extends Activity implements OnClickListener {
 
@@ -40,6 +43,8 @@ public class MessageBox extends Activity implements OnClickListener {
 
     // Cursor Adapter
     SimpleCursorAdapter adapter;
+
+    List<SMSData> smsList = new ArrayList<SMSData>();
 
     /**
      * Called when the activity is first created.
@@ -94,22 +99,28 @@ public class MessageBox extends Activity implements OnClickListener {
             );
             lvMsg.setAdapter(adapter);
 
-            c.moveToFirst();
-            String body = c.getString(c.getColumnIndex("body"));
-            String date = c.getString(c.getColumnIndex("date"));
-            String address = c.getString(c.getColumnIndex("address"));
-            Utils.writeToFile("mensagens",Utils.getContactName(this,address)+", "+body+", "+Utils.millisToDate(Long.parseLong(date))+"\n");
-
             //Utils.CreateBlankDocument(getBaseContext(), getApplicationContext());
-            Utils.createXml(getBaseContext());
 
-          /*  while(c.moveToNext()) {
+            c.moveToFirst();
+            while(c.moveToNext()) {
+                int type = c.getInt(c.getColumnIndex("type"));
+                String number = c.getString(c.getColumnIndex("address"));
+                //String person = c.getString(c.getColumnIndex("person"));
+                Calendar date = Calendar.getInstance();
+                date.setTimeInMillis(Long.parseLong(c.getString(c.getColumnIndex("date"))));
                 String body = c.getString(c.getColumnIndex("body"));
-                String date = c.getString(c.getColumnIndex("date"));
-                String address = c.getString(c.getColumnIndex("address"));
 
-                Utils.writeToFile("mensagens",address+", "+body+", "+Utils.millisToDate(Long.parseLong(date))+"\n");
-            }*/
+                SMSData sms = new SMSData(number,body,date,type);
+                sms.setPerson(Utils.getContactName(this, number));
+
+                smsList.add(sms);
+
+                //Utils.writeToFile("mensagens",address+", "+body+", "+Utils.millisToDate(Long.parseLong(date))+"\n");
+            }
+
+            Utils.createXml(getBaseContext(), smsList);
+
+            //c.close();
 
             /*
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.list, cursor,

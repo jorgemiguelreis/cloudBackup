@@ -19,6 +19,8 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vrs.smsapp.SMSData;
+
 import org.w3c.dom.*;
 import org.xmlpull.v1.XmlSerializer;
 
@@ -38,6 +40,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -177,9 +180,9 @@ public class Utils {
     }
 
 
-    static public void createXml(Context context) {
+    static public void createXml(Context context, List<SMSData> smsList) {
         //create a new file called "new.xml" in the SD card
-        File newxmlfile = new File(Environment.getExternalStorageDirectory()+"/new.xml");
+        File newxmlfile = new File(Environment.getExternalStorageDirectory()+"/SMSs.xml");
         try{
             newxmlfile.createNewFile();
         }catch(IOException e){
@@ -202,22 +205,37 @@ public class Utils {
             //set indentation option
             serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
             //start a tag called "root"
-            serializer.startTag(null, "root");
-            //i indent code just to have a view similar to xml-tree
-            serializer.startTag(null, "child1");
-            serializer.endTag(null, "child1");
+            serializer.startTag(null, "SMSRecord");
 
-            serializer.startTag(null, "child2");
-            //set an attribute called "attribute" with a "value" for <child2>
-            serializer.attribute(null, "attribute", "value");
-            serializer.endTag(null, "child2");
+            for(SMSData sms : smsList)
+            {
+                serializer.startTag(null, "SMS");
+                //i indent code just to have a view similar to xml-tree
+                serializer.startTag(null, "Type");
+                serializer.text(Integer.toString(sms.getType()));
+                serializer.endTag(null, "Type");
+/*
+                serializer.startTag(null, "Person");
+                serializer.text(sms.getPerson());
+                serializer.endTag(null, "Person");
+*/
+                serializer.startTag(null, "Number");
+                serializer.text(sms.getNumber());
+                serializer.endTag(null, "Number");
 
-            serializer.startTag(null, "child3");
-            //write some text inside <child3>
-            serializer.text("some text inside child3");
-            serializer.endTag(null, "child3");
+                serializer.startTag(null, "Date");
+                serializer.text(sms.getDate().toString());
+                serializer.endTag(null, "Date");
 
-            serializer.endTag(null, "root");
+                serializer.startTag(null, "Body");
+                serializer.text(sms.getBody());
+                serializer.endTag(null, "Body");
+
+                serializer.endTag(null, "SMS");
+            }
+
+            serializer.endTag(null, "SMSRecord");
+
             serializer.endDocument();
             //write xml data into the FileOutputStream
             serializer.flush();

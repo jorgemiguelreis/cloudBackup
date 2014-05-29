@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- From: file:/C:/Users/Reis/Dropbox/Faculdade/2013-2014/2º%20Semestre/SDIS/TP2/AppAndroid/app/src/main/res/values-v11/styles.xml -->
+    <!-- From: file:/C:/Users/Miao/AndroidStudioProjects/sdis_cloudBackup/tutoriais-testes/AppAndroid/app/src/main/res/values-v11/styles.xml -->
     <eat-comment />
 
     <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
