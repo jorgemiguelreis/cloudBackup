@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/C:/Users/Reis/Dropbox/Faculdade/2013-2014/2º%20Semestre/SDIS/TP2/sdis_cloudBackup/tutoriais-testes/SMSApp/app/src/main/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="app_name">SMSApp</string>
+    <string name="hello">Hello World, SMSAppActivity!</string>
+
+</resources>

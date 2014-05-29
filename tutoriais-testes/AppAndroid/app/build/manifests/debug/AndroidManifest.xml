@@ -1,0 +1,17 @@
+<!-- From: file:/C:/Users/Reis/Dropbox/Faculdade/2013-2014/2º%20Semestre/SDIS/TP2/AppAndroid/app/src/main/AndroidManifest.xml -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.itcuties.android.apps">
+
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16"/>
+    
+    <uses-permission android:name="android.permission.READ_SMS"/>
+
+    <application android:allowBackup="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/AppTheme">
+        <activity android:label="@string/app_name" android:name="com.itcuties.android.apps.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\main\assets" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="C:\Users\Reis\Dropbox\Faculdade\2013-2014\2º Semestre\SDIS\TP2\AppAndroid\app\src\debug\assets" />
+    </dataSet>
+
+</merger>
