@@ -74,13 +74,14 @@ public class MessageBox extends Activity implements OnClickListener {
         if (v == btnInbox) {
 
             // Create Inbox box URI
-            Uri inboxURI = Uri.parse("content://sms/inbox");
+            Uri inboxURI = Uri.parse("content://sms");
 
             // List required columns
             //String[] reqCols = new String[]{"_id", "address", "body", "person", "date", "type", "read", "status"};
 
             // Get Content Resolver object, which will deal with Content
             // Provider
+
             ContentResolver cr = getContentResolver();
 
             // Fetch Inbox SMS Message from Built-in Content Provider
@@ -98,6 +99,10 @@ public class MessageBox extends Activity implements OnClickListener {
             String date = c.getString(c.getColumnIndex("date"));
             String address = c.getString(c.getColumnIndex("address"));
             Utils.writeToFile("mensagens",Utils.getContactName(this,address)+", "+body+", "+Utils.millisToDate(Long.parseLong(date))+"\n");
+
+            //Utils.CreateBlankDocument(getBaseContext(), getApplicationContext());
+            Utils.createXml(getBaseContext());
+
           /*  while(c.moveToNext()) {
                 String body = c.getString(c.getColumnIndex("body"));
                 String date = c.getString(c.getColumnIndex("date"));

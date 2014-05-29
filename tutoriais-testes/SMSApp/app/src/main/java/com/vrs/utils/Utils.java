@@ -9,12 +9,25 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.*;
+import org.xmlpull.v1.XmlSerializer;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,6 +38,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.TransformerFactory;
 
 /**
  * Created by Reis on 28/05/2014.
@@ -113,6 +130,106 @@ public class Utils {
             e.printStackTrace();
         }
 
+    }
+
+    static public void CreateBlankDocument(Context context, Context appContext){
+        Toast.makeText(context,
+                "Creating Blank Document",
+                Toast.LENGTH_LONG).show();
+        try{
+            //Create instance of DocumentBuilderFactory
+            DocumentBuilderFactory factory =
+                    DocumentBuilderFactory.newInstance();
+            //Get the DocumentBuilder
+            DocumentBuilder parser = factory.newDocumentBuilder();
+            //Create blank DOM Document
+            Document doc=parser.newDocument();
+            //create the root element
+            Element root=doc.createElement("root");
+            //all it to the xml tree
+            doc.appendChild(root);
+            //create a comment
+            Comment comment=doc.createComment("This is a comment");
+            //add in the root element
+            root.appendChild(comment);
+            //creat child element
+            Element childelement=doc.createElement("child");
+            //Add the attribute to the child
+            childelement.setAttribute("value", "1");
+            root.appendChild(childelement);
+
+            TransformerFactory transformerfactory=
+                    TransformerFactory.newInstance();
+            Transformer transformer=
+                    transformerfactory.newTransformer();
+
+            DOMSource source=new DOMSource(doc);
+            FileOutputStream _stream=appContext.openFileOutput("NewDom.xml", appContext.MODE_WORLD_WRITEABLE);
+            StreamResult result=new StreamResult(_stream);
+
+            transformer.transform(source, result);
+            Toast.makeText(context,
+                    "Done File created",
+                    Toast.LENGTH_LONG).show();
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+
+    static public void createXml(Context context) {
+        //create a new file called "new.xml" in the SD card
+        File newxmlfile = new File(Environment.getExternalStorageDirectory()+"/new.xml");
+        try{
+            newxmlfile.createNewFile();
+        }catch(IOException e){
+            Log.e("IOException", "exception in createNewFile() method");
+        }
+        //we have to bind the new file with a FileOutputStream
+        FileOutputStream fileos = null;
+        try{
+            fileos = new FileOutputStream(newxmlfile);
+        }catch(FileNotFoundException e){
+            Log.e("FileNotFoundException", "can't create FileOutputStream");
+        }
+        //we create a XmlSerializer in order to write xml data
+        XmlSerializer serializer = Xml.newSerializer();
+        try {
+            //we set the FileOutputStream as output for the serializer, using UTF-8 encoding
+            serializer.setOutput(fileos, "UTF-8");
+            //Write <?xml declaration with encoding (if encoding not null) and standalone flag (if standalone not null)
+            serializer.startDocument(null, Boolean.valueOf(true));
+            //set indentation option
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+            //start a tag called "root"
+            serializer.startTag(null, "root");
+            //i indent code just to have a view similar to xml-tree
+            serializer.startTag(null, "child1");
+            serializer.endTag(null, "child1");
+
+            serializer.startTag(null, "child2");
+            //set an attribute called "attribute" with a "value" for <child2>
+            serializer.attribute(null, "attribute", "value");
+            serializer.endTag(null, "child2");
+
+            serializer.startTag(null, "child3");
+            //write some text inside <child3>
+            serializer.text("some text inside child3");
+            serializer.endTag(null, "child3");
+
+            serializer.endTag(null, "root");
+            serializer.endDocument();
+            //write xml data into the FileOutputStream
+            serializer.flush();
+            //finally we close the file stream
+            fileos.close();
+
+            //TextView tv = (TextView)this.findViewById(R.id.result);
+            //tv.setText("file has been created on SD card");
+            Toast.makeText(context, "Done File created", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Log.e("Exception","error occurred while creating xml file");
+        }
     }
 
 }
