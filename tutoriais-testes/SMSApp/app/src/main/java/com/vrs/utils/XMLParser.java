@@ -3,6 +3,7 @@ package com.vrs.utils;
 import android.os.Message;
 import android.util.Xml;
 
+import com.vrs.smsapp.CallLogData;
 import com.vrs.smsapp.SMSData;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -93,4 +94,60 @@ public class XMLParser {
         }
         return smsList;
     }
+
+
+
+    public ArrayList<CallLogData> parseCallLogXML() {
+        ArrayList<CallLogData> callLogList = null;
+        XmlPullParser parser = Xml.newPullParser();
+        try {
+            File file = new File(path);
+            FileInputStream fis = new FileInputStream(file);
+            // auto-detect the encoding from the stream
+            parser.setInput(fis, null);
+            int eventType = parser.getEventType();
+            CallLogData currentCallLog = null;
+            boolean done = false;
+            while (eventType != XmlPullParser.END_DOCUMENT && !done){
+                String name = null;
+                switch (eventType){
+                    case XmlPullParser.START_DOCUMENT:
+                        callLogList = new ArrayList<CallLogData>();
+                        break;
+                    case XmlPullParser.START_TAG:
+                        name = parser.getName();
+                        if (name.equalsIgnoreCase("CallLog")){
+                            currentCallLog = new CallLogData();
+                        } else if (currentCallLog != null) {
+                            if (name.equalsIgnoreCase("Type")){
+                                currentCallLog.setType(Integer.parseInt(parser.nextText()));
+                            } else if (name.equalsIgnoreCase("Person")){
+                                currentCallLog.setPerson(parser.nextText());
+                            } else if (name.equalsIgnoreCase("Number")){
+                                currentCallLog.setNumber(parser.nextText());
+                            } else if (name.equalsIgnoreCase("Date")){
+                                currentCallLog.setDateString(parser.nextText());
+                            } else if(name.equalsIgnoreCase("Duration")) {
+                                currentCallLog.setDuration(parser.nextText());
+                            }
+                        }
+                        break;
+                    case XmlPullParser.END_TAG:
+                        name = parser.getName();
+                        if (name.equalsIgnoreCase("CallLog") &&
+                                currentCallLog != null){
+                            callLogList.add(currentCallLog);
+                        } else if (name.equalsIgnoreCase("CallLogRecord")){
+                            done = true;
+                        }
+                        break;
+                }
+                eventType = parser.next();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return callLogList;
+    }
+
 }

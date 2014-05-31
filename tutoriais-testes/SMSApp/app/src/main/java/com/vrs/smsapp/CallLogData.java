@@ -8,14 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class SMSData {
+public class CallLogData {
 
     //public enum smsType {RECEBIDA, ENVIADA};
 
     // Number from witch the sms was send
     private String number;
     // SMS text body
-    private String body;
+    private String duration;
 
     static SimpleDateFormat FORMATTER = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
 
@@ -26,11 +26,11 @@ public class SMSData {
 
     private String person;
 
-    public SMSData() {}
-    public SMSData(String number, String body, Calendar date, int type)
+    public CallLogData() {}
+    public CallLogData(String number, String duration, Calendar date, int type)
     {
         this.number = number;
-        this.body = body;
+        this.duration = duration;
         this.date = date;
         this.type = type;
     }
@@ -59,8 +59,8 @@ public class SMSData {
         return FORMATTER.format(date.getTime());
     }
 
-    public String getBody() {
-        return body;
+    public String getDuration() {
+        return duration;
     }
 
     public void setType(int type) {
@@ -83,8 +83,8 @@ public class SMSData {
         this.dateString = date;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setDuration(String body) {
+        this.duration = body;
     }
 
     /*
