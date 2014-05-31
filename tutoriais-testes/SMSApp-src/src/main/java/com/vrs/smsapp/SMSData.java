@@ -10,6 +10,8 @@ import java.util.Date;
 
 public class SMSData {
 
+    //public enum smsType {RECEBIDA, ENVIADA};
+
     // Number from witch the sms was send
     private String number;
     // SMS text body
@@ -18,11 +20,13 @@ public class SMSData {
     static SimpleDateFormat FORMATTER = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
 
     private Calendar date;
+    private String dateString;
 
     private int type;
 
     private String person;
 
+    public SMSData() {}
     public SMSData(String number, String body, Calendar date, int type)
     {
         this.number = number;
@@ -47,6 +51,10 @@ public class SMSData {
         return date;
     }
 
+    public String getDateString() {
+        return dateString;
+    }
+
     public String getFormattedDate() {
         return FORMATTER.format(date.getTime());
     }
@@ -69,6 +77,10 @@ public class SMSData {
 
     public void setDate(Calendar date) {
         this.date = date;
+    }
+
+    public void setDateString(String date) {
+        this.dateString = date;
     }
 
     public void setBody(String body) {

@@ -15,12 +15,46 @@
 			android:id="@+id/btnDraft" android:text="Draft" android:layout_width="match_parent"></Button>
 	</LinearLayout>
 
-    <Button
-        android:text="Create File"
-        android:id="@+id/btnFile"
-        android:layout_height="61dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_gravity="right" />
+        android:layout_height="37dp" >
+
+        <Button
+            android:text="Create XML"
+            android:id="@+id/btnCreate"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent" />
+
+        <Button
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoad"
+            android:text="Load XML"
+            android:layout_width="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <Button
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="List Contacts"
+            android:layout_width="match_parent"
+            android:id="@+id/btnContacts" />
+
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="List Call Logs"
+            android:layout_width="match_parent"
+            android:id="@+id/btnCallLogs" />
+    </LinearLayout>
 
     <ListView android:layout_width="match_parent"
 		android:layout_weight="1" android:layout_height="match_parent"

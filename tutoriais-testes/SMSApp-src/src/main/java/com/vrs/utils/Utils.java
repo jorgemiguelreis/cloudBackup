@@ -51,7 +51,7 @@ import javax.xml.transform.TransformerFactory;
  */
 public class Utils {
 
-    static final String mainFolder = "/CloudBackupFolder/";
+    public static final String mainFolder = Environment.getExternalStorageDirectory()+"/CloudBackupFolder/";
 
     static public String getContactName(Context context, String phoneNumber) {
         ContentResolver cr = context.getContentResolver();
@@ -182,7 +182,7 @@ public class Utils {
 
     static public void createXml(Context context, List<SMSData> smsList) {
         //create a new file called "new.xml" in the SD card
-        File newxmlfile = new File(Environment.getExternalStorageDirectory()+"/SMSs.xml");
+        File newxmlfile = new File(mainFolder+"/SMSs.xml");
         try{
             newxmlfile.createNewFile();
         }catch(IOException e){
@@ -244,9 +244,7 @@ public class Utils {
             //finally we close the file stream
             fileos.close();
 
-            //TextView tv = (TextView)this.findViewById(R.id.result);
-            //tv.setText("file has been created on SD card");
-            Toast.makeText(context, "Done File created", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "XML file created", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Log.e("Exception","error occurred while creating xml file");
         }
