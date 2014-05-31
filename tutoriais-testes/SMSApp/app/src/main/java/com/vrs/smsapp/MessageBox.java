@@ -1,23 +1,14 @@
 package com.vrs.smsapp;
 
-/***
- *    Application Name : MessageBox 
- *    Author : Vimal Rughani
- *    Website : http://pulse7.net
- *    For more details visit http://pulse7.net/android/read-sms-message-inbox-sent-draft-android/
- */
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.CallLog;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -27,15 +18,8 @@ import android.widget.Toast;
 import com.vrs.utils.Utils;
 import com.vrs.utils.XMLParser;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class MessageBox extends Activity implements OnClickListener {
@@ -116,26 +100,7 @@ public class MessageBox extends Activity implements OnClickListener {
             lvMsg.setAdapter(adapter);
 
             //Utils.CreateBlankDocument(getBaseContext(), getApplicationContext());
-/*
-            if(c.moveToFirst()) {
-                do
-                 {
-                    int type = c.getInt(c.getColumnIndex("type"));
-                    String number = c.getString(c.getColumnIndex("address"));
-                    //String person = c.getString(c.getColumnIndex("person"));
-                    Calendar date = Calendar.getInstance();
-                    date.setTimeInMillis(Long.parseLong(c.getString(c.getColumnIndex("date"))));
-                    String body = c.getString(c.getColumnIndex("body"));
 
-                    SMSData sms = new SMSData(number, body, date, type);
-                    sms.setPerson(Utils.getContactName(this, number));
-
-                    smsList.add(sms);
-                    //Utils.writeToFile("mensagens",address+", "+body+", "+Utils.millisToDate(Long.parseLong(date))+"\n");
-                }while (c.moveToNext());
-            }
-            Utils.createXml(getBaseContext(), smsList);
-*/
             //c.close();
 
             /*
@@ -289,7 +254,6 @@ adapter.setViewBinder(new ViewBinder() {
 
             ContentResolver cr = getContentResolver();
 
-            // Fetch Inbox SMS Message from Built-in Content Provider
             Cursor c = cr.query(callsURI, reqCols, null, null, null);
 
             if(c.moveToFirst()) {
@@ -320,8 +284,6 @@ adapter.setViewBinder(new ViewBinder() {
 
             Toast.makeText(getBaseContext(), "File Loaded", Toast.LENGTH_SHORT).show();
 
-            //Display SMS's
-
             // Create the adapter to convert the array to views
             CallLogAdapter adapter1 = new CallLogAdapter(this, callLogList);
 
@@ -331,7 +293,3 @@ adapter.setViewBinder(new ViewBinder() {
         }
     }
 }
-
-/*adapter = new SimpleCursorAdapter(this, R.layout.row, c,
-        new String[]{"body", "address", "date", "type"}, new int[]{
-        R.id.lblMsg, R.id.lblNumber, R.id.lbldate, R.id.lbltype} */

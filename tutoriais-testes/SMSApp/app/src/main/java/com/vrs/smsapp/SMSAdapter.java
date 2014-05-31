@@ -35,7 +35,7 @@ public class SMSAdapter extends ArrayAdapter<SMSData> {
         TextView tvBody = (TextView) convertView.findViewById(R.id.lblMsg);
 
         // Populate the data into the template view using the data object
-        tvType.setText(Integer.toString(sms.getType()));
+        tvType.setText(sms.getTypeFormatted());
         tvNumber.setText(sms.getNumber());
         tvDate.setText(sms.getDateString());
         tvBody.setText(sms.getBody());

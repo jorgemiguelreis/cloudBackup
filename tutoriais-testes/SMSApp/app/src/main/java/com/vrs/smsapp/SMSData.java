@@ -39,6 +39,16 @@ public class SMSData {
         return type;
     }
 
+    public String getTypeFormatted()
+    {
+        if(type == 1)
+            return "Inbox";
+        else if(type == 2)
+            return "Sent";
+        else
+            return "Draft";
+    }
+
     public String getNumber() {
         return number;
     }

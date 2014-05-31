@@ -35,8 +35,16 @@ public class CallLogData {
         this.type = type;
     }
 
-    public int getType() {
-        return type;
+    public int getType() { return type; }
+
+    public String getTypeFormatted()
+    {
+        if(type == 1)
+            return "Incoming Call";
+        else if(type == 2)
+            return "Outgoing Call";
+        else
+            return "Missed Call";
     }
 
     public String getNumber() {
@@ -83,41 +91,24 @@ public class CallLogData {
         this.dateString = date;
     }
 
-    public void setDuration(String body) {
-        this.duration = body;
-    }
+    public void setDurationFormatted(String callDuration) {
+        int seconds = Integer.parseInt(callDuration);
 
-    /*
-    public String getDate() {
-        return FORMATTER.format(this.date);
-    }
+        int hours, minutes;
+        hours = seconds / 3600;
+        minutes = (seconds % 3600) / 60;
+        seconds = (seconds % 3600) % 60;
 
-    public void setDate(String date) {
-        // pad the date if necessary
-        while (!date.endsWith("00")){
-            date += "0";
+        if(hours == 0)
+        {
+            if(minutes == 0)
+                duration = seconds+" secs";
+            else
+                duration = minutes+" mins "+seconds+" secs";
         }
-        try {
-            this.date = FORMATTER.parse(date.trim());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+        else
+            duration = hours+" hours "+minutes+" mins "+seconds+" secs";
     }
-*/
 
-
-/*
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Number: ");
-        sb.append(number);
-        sb.append('\n');
-        sb.append("Date: ");
-        sb.append(this.getDate());
-        sb.append("Body: ");
-        sb.append(body);
-        return sb.toString();
-    }
-*/
 }
 

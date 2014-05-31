@@ -128,7 +128,7 @@ public class XMLParser {
                             } else if (name.equalsIgnoreCase("Date")){
                                 currentCallLog.setDateString(parser.nextText());
                             } else if(name.equalsIgnoreCase("Duration")) {
-                                currentCallLog.setDuration(parser.nextText());
+                                currentCallLog.setDurationFormatted(parser.nextText());
                             }
                         }
                         break;

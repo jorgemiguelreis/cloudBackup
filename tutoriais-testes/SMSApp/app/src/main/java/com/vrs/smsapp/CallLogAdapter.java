@@ -40,7 +40,7 @@ public class CallLogAdapter extends ArrayAdapter<CallLogData> {
         tvDate.setText(callLog.getDateString());
         tvBody.setText(callLog.getDuration());
 */
-        tvNumber.setText(Integer.toString(callLog.getType()));
+        tvNumber.setText(callLog.getTypeFormatted());
         tvBody.setText(callLog.getNumber());
         tvDate.setText(callLog.getDateString());
         tvType.setText(callLog.getDuration());
