@@ -52,7 +52,8 @@ import javax.xml.transform.TransformerFactory;
  */
 public class Utils {
 
-    public static final String mainFolder = Environment.getExternalStorageDirectory()+"/CloudBackupFolder/";
+    public static final String SMSFolder = Environment.getExternalStorageDirectory()+"/CloudBackupFolder/SMSFolder/";
+    public static final String CallLogFolder = Environment.getExternalStorageDirectory()+"/CloudBackupFolder/CallLogFolder/";
 
     static public String getContactName(Context context, String phoneNumber) {
         ContentResolver cr = context.getContentResolver();
@@ -104,7 +105,7 @@ public class Utils {
         FileOutputStream fos = null;
 
         try {
-            final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + mainFolder );
+            final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + SMSFolder );
 
             if (!dir.exists())
             {
@@ -181,9 +182,15 @@ public class Utils {
     }
 
 
-    static public void createXml(Context context, List<SMSData> smsList) {
+    static public void createXml(Context context, List<SMSData> smsList, String dayOfYear) {
         //create a new file called "new.xml" in the SD card
-        File newxmlfile = new File(mainFolder+"/SMSs.xml");
+        final File dir = new File(SMSFolder );
+        if (!dir.exists())
+        {
+            dir.mkdirs();
+        }
+
+        File newxmlfile = new File(dir,"SMS-"+dayOfYear+".xml");
         try{
             newxmlfile.createNewFile();
         }catch(IOException e){
@@ -245,16 +252,22 @@ public class Utils {
             //finally we close the file stream
             fileos.close();
 
-            Toast.makeText(context, "XML file created", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "SMS XML file created", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Log.e("Exception","error occurred while creating xml file");
         }
     }
 
 
-    static public void createCallLogXML(Context context, List<CallLogData> callLogList) {
+    static public void createCallLogXML(Context context, List<CallLogData> callLogList, String dayOfYear) {
         //create a new file called "new.xml" in the SD card
-        File newxmlfile = new File(mainFolder+"/CallLogs.xml");
+        final File dir = new File(CallLogFolder );
+        if (!dir.exists())
+        {
+            dir.mkdirs();
+        }
+
+        File newxmlfile = new File(dir, "CallLog-"+dayOfYear+".xml");
         try{
             newxmlfile.createNewFile();
         }catch(IOException e){
