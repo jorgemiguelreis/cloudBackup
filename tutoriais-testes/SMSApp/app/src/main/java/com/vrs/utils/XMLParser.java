@@ -25,13 +25,13 @@ public class XMLParser {
     //URL fileURL;
     String path;
 
-    public XMLParser(String url) {
+    public XMLParser(String url, String filename) {
         /*try {
             this.fileURL = new URL(url);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }*/
-        path=url;
+        path=url+filename;
     }
 /*
     protected InputStream getInputStream() {

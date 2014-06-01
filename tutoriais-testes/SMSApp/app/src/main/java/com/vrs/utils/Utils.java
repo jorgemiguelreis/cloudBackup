@@ -335,4 +335,9 @@ public class Utils {
         }
     }
 
+    public static void showToast(Context context, String msg)
+    {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+    }
+
 }

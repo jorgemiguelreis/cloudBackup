@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.vrs.utils.Utils;
 import com.vrs.utils.XMLParser;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -213,7 +214,8 @@ adapter.setViewBinder(new ViewBinder() {
 
 
         if (v == btnLoad) {
-            XMLParser parser = new XMLParser(Utils.SMSFolder+"SMSs.xml");
+            /*
+            XMLParser parser = new XMLParser(Utils.SMSFolder, "SMSs.xml");
             // Construct the data source
             ArrayList<SMSData> smsList = parser.parseXMLfile();
 
@@ -227,6 +229,16 @@ adapter.setViewBinder(new ViewBinder() {
             // Attach the adapter to a ListView
             ListView lv = (ListView) findViewById(R.id.lvMsg);
             lv.setAdapter(adapter1);
+            */
+
+            File folder = new File(Utils.SMSFolder);
+            File[] listOfFiles = folder.listFiles();
+
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile()) {
+                    Log.i("File ", listOfFiles[i].getName());
+                }
+            }
         }
 
         if (v == btnCallLogs) {
@@ -301,7 +313,7 @@ adapter.setViewBinder(new ViewBinder() {
 
 
         if (v == btnLoadCallLog) {
-            XMLParser parser = new XMLParser(Utils.CallLogFolder+"CallLogs.xml");
+            XMLParser parser = new XMLParser(Utils.CallLogFolder, "CallLogs.xml");
             // Construct the data source
             ArrayList<CallLogData> callLogList = parser.parseCallLogXML();
 
