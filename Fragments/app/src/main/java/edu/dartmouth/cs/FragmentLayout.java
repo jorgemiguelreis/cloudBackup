@@ -99,7 +99,6 @@ public class FragmentLayout extends Activity {
 					Toast.LENGTH_LONG).show();*/
 
             // Populate list with our static array of titles in list in the
-			// Shakespeare class
 			setListAdapter(new ArrayAdapter<String>(getActivity(),
 					android.R.layout.simple_list_item_activated_1,
                     //******     CHANGE SMS_TITLES to CallLog_TITLES for Call Log Data     ******//

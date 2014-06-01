@@ -52,14 +52,14 @@
             android:layout_weight="0.5"
             android:layout_height="wrap_content"
             android:id="@+id/btnLoad"
-            android:text="Load XML"
+            android:text="View SMSs"
             android:layout_width="match_parent" />
 
         <Button
             android:layout_weight="0.5"
             android:layout_height="wrap_content"
             android:id="@+id/btnLoadCallLog"
-            android:text="Load Call Log"
+            android:text="View Calls"
             android:layout_width="match_parent" />
     </LinearLayout>
 

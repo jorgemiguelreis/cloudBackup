@@ -131,6 +131,16 @@
                 path="C:\Users\Miao\AndroidStudioProjects\Fragments\app\src\main\res\layout\messagebox.xml"
                 qualifiers=""
                 type="layout" />
+            <file
+                name="fragment_layout2"
+                path="C:\Users\Miao\AndroidStudioProjects\Fragments\app\src\main\res\layout\fragment_layout2.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                name="fragment_layout2"
+                path="C:\Users\Miao\AndroidStudioProjects\Fragments\app\src\main\res\layout-land\fragment_layout2.xml"
+                qualifiers="land"
+                type="layout" />
         </source>
         <source path="C:\Users\Miao\AndroidStudioProjects\Fragments\app\build\res\rs\debug" />
         <source path="C:\Users\Miao\AndroidStudioProjects\Fragments\app\build\res\generated\debug" />
