@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+		android:layout_width="match_parent"
+        android:layout_weight="0"
+		android:layout_height="wrap_content">
+
+        <Button
+            android:text="Inbox"
+            android:id="@+id/btnInbox"
+			android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+			android:layout_width="match_parent">
+		</Button>
+
+        <Button
+            android:text="Sent Box"
+            android:id="@+id/btnSentBox"
+			android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+			android:layout_width="match_parent">
+		</Button>
+
+        <Button
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+			android:id="@+id/btnDraft"
+            android:text="Draft"
+            android:layout_width="match_parent">
+        </Button>
+	</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="37dp" >
+
+        <Button
+            android:text="Create XML"
+            android:id="@+id/btnCreate"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_width="match_parent" />
+
+        <Button
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoad"
+            android:text="View SMSs"
+            android:layout_width="match_parent" />
+
+        <Button
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnLoadCallLog"
+            android:text="View Calls"
+            android:layout_width="match_parent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <Button
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="List Contacts"
+            android:layout_width="match_parent"
+            android:id="@+id/btnContacts" />
+
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="List Call Logs"
+            android:layout_width="match_parent"
+            android:id="@+id/btnCallLogs" />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Create Call Logs XML"
+            android:layout_width="match_parent"
+            android:id="@+id/btnCallLogsXML" />
+    </LinearLayout>
+
+    <ListView android:layout_width="match_parent"
+		android:layout_weight="1" android:layout_height="match_parent"
+		android:id="@+id/lvMsg"></ListView>
+
+</LinearLayout>
+<!-- From: file:/C:/Users/Miao/AndroidStudioProjects/Fragments/app/src/main/res/layout/messagebox.xml -->

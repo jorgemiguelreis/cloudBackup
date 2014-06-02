@@ -12,27 +12,10 @@
     <TextView android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="TextView" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:textColor="#00f"
-        android:id="@+id/lblperson"></TextView>
-    <TextView android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="TextView" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:textColor="#00f"
         android:id="@+id/lbldate"></TextView>
     <TextView android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="TextView" android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:textColor="#00f"
         android:id="@+id/lbltype"></TextView>
-    <TextView android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="TextView" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:textColor="#00f"
-        android:id="@+id/lblread"></TextView>
-    <TextView android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="TextView" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:textColor="#00f"
-        android:id="@+id/lblstatus"></TextView>
-    <TextView android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="TextView" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:textColor="#00f"
-        android:id="@+id/lblcontact"></TextView>
-
 </LinearLayout>
 <!-- From: file:/C:/Users/Miao/AndroidStudioProjects/sdis_cloudBackup/tutoriais-testes/SMSApp/app/src/main/res/layout/row.xml -->

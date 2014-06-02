@@ -1,0 +1,349 @@
+package edu.dartmouth.cs;
+
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.CallLog;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import edu.dartmouth.cs.FragmentLayout;
+import edu.dartmouth.cs.R;
+import edu.dartmouth.cs.apis.XMLFilesData;
+import smsapp.CallLogAdapter;
+import smsapp.CallLogData;
+import smsapp.SMSData;
+import utils.Utils;
+import utils.XMLParser;
+
+public class MessageBox extends Activity implements OnClickListener {
+
+    // GUI Widget
+    Button btnSent, btnInbox, btnDraft, btnCreate, btnLoad, btnContacts, btnCallLogs, btnCallLogsXML, btnLoadCallLog;
+    TextView lblMsg, lblNo;
+    ListView lvMsg;
+
+    // Cursor Adapter
+    SimpleCursorAdapter adapter;
+
+    List<SMSData> smsList = new ArrayList<SMSData>();
+    List<CallLogData> callLogList = new ArrayList<CallLogData>();
+
+    /**
+     * Called when the activity is first created.
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.messagebox);
+
+        // Init GUI Widget
+        btnInbox = (Button) findViewById(R.id.btnInbox);
+        btnInbox.setOnClickListener(this);
+
+        btnSent = (Button) findViewById(R.id.btnSentBox);
+        btnSent.setOnClickListener(this);
+
+        btnDraft = (Button) findViewById(R.id.btnDraft);
+        btnDraft.setOnClickListener(this);
+
+        btnCreate = (Button) findViewById(R.id.btnCreate);
+        btnCreate.setOnClickListener(this);
+        btnLoad = (Button) findViewById(R.id.btnLoad);
+        btnLoad.setOnClickListener(this);
+
+        btnContacts = (Button) findViewById(R.id.btnContacts);
+        btnContacts.setOnClickListener(this);
+
+        btnCallLogs = (Button) findViewById(R.id.btnCallLogs);
+        btnCallLogs.setOnClickListener(this);
+
+        btnCallLogsXML = (Button) findViewById(R.id.btnCallLogsXML);
+        btnCallLogsXML.setOnClickListener(this);
+
+        btnLoadCallLog = (Button) findViewById(R.id.btnLoadCallLog);
+        btnLoadCallLog.setOnClickListener(this);
+
+        lvMsg = (ListView) findViewById(R.id.lvMsg);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v == btnInbox) {
+
+            // Create Inbox box URI
+            Uri inboxURI = Uri.parse("content://sms/inbox");
+
+            // List required columns
+            String[] reqCols = new String[]{"_id", "address", "body", "date", "type"};
+
+            // Get Content Resolver object, which will deal with Content
+            // Provider
+
+            ContentResolver cr = getContentResolver();
+
+            // Fetch Inbox SMS Message from Built-in Content Provider
+            Cursor c = cr.query(inboxURI, reqCols, null, null, null);
+
+            // Attached Cursor with adapter and display in listview
+            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
+                    new String[]{"body", "address", "date", "type"}, new int[]{
+                    R.id.lblMsg, R.id.lblNumber, R.id.lbldate, R.id.lbltype}
+            );
+            lvMsg.setAdapter(adapter);
+
+            //Utils.CreateBlankDocument(getBaseContext(), getApplicationContext());
+
+            //c.close();
+
+            /*
+            SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.list, cursor,
+            new String[] { Definition.Item.TITLE, Definition.Item.CREATE_DATE }, new int[] { R.id.title, R.id.createDate});
+
+adapter.setViewBinder(new ViewBinder() {
+
+    public boolean setViewValue(View aView, Cursor aCursor, int aColumnIndex) {
+
+        if (aColumnIndex == 2) {
+                String createDate = aCursor.getString(aColumnIndex);
+                TextView textView = (TextView) aView;
+                textView.setText("Create date: " + MyFormatterHelper.formatDate(getApplicationContext(), createDate));
+                return true;
+         }
+
+         return false;
+    }
+});
+             */
+        }
+
+        if (v == btnSent) {
+
+            // Create Sent box URI
+            Uri sentURI = Uri.parse("content://sms/sent");
+
+            // List required columns
+            String[] reqCols = new String[]{"_id", "address", "body", "date", "type"};
+
+            // Get Content Resolver object, which will deal with Content
+            // Provider
+            ContentResolver cr = getContentResolver();
+
+            // Fetch Sent SMS Message from Built-in Content Provider
+            Cursor c = cr.query(sentURI, reqCols, null, null, null);
+
+            // Attached Cursor with adapter and display in listview
+            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
+                    new String[]{"body", "address", "date", "type"}, new int[]{
+                    R.id.lblMsg, R.id.lblNumber, R.id.lbldate, R.id.lbltype}
+            );
+            lvMsg.setAdapter(adapter);
+
+        }
+
+        if (v == btnDraft) {
+            // Create Draft box URI
+            Uri draftURI = Uri.parse("content://sms/draft");
+
+            // List required columns
+            String[] reqCols = new String[]{"_id", "address", "body", "date", "type"};
+
+            // Get Content Resolver object, which will deal with Content
+            // Provider
+            ContentResolver cr = getContentResolver();
+
+            // Fetch Sent SMS Message from Built-in Content Provider
+            Cursor c = cr.query(draftURI, reqCols, null, null, null);
+
+            // Attached Cursor with adapter and display in listview
+            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
+                    new String[]{"body", "address", "date", "type"}, new int[]{
+                    R.id.lblMsg, R.id.lblNumber, R.id.lbldate, R.id.lbltype}
+            );
+            lvMsg.setAdapter(adapter);
+
+        }
+
+        if (v == btnCreate) {
+
+            String[] reqCols = new String[]{"_id", "address", "body", "date", "type"};
+
+            Uri inboxURI = Uri.parse("content://sms");
+
+            ContentResolver cr = getContentResolver();
+
+            // Fetch Inbox SMS Message from Built-in Content Provider
+            Cursor c = cr.query(inboxURI, reqCols, null, null, null);
+
+            if(c.moveToFirst()) {
+                Calendar date = Calendar.getInstance();
+                date.setTimeInMillis(Long.parseLong(c.getString(c.getColumnIndex("date"))));
+                String dayOfYear1 = date.get(Calendar.YEAR)+"-"+ (date.get(Calendar.MONTH)+1) +"-"+date.get(Calendar.DAY_OF_MONTH);
+                do
+                {
+                    int type = c.getInt(c.getColumnIndex("type"));
+                    String number = c.getString(c.getColumnIndex("address"));
+                    date = Calendar.getInstance();
+                    date.setTimeInMillis(Long.parseLong(c.getString(c.getColumnIndex("date"))));
+                    String dayOfYear = date.get(Calendar.YEAR)+"-"+ (date.get(Calendar.MONTH)+1) +"-"+date.get(Calendar.DAY_OF_MONTH);
+                    String body = c.getString(c.getColumnIndex("body"));
+                    SMSData sms = new SMSData(number, body, date, type);
+                    sms.setPerson(Utils.getContactName(this, number));
+
+                    if(dayOfYear.equals(dayOfYear1))
+                        smsList.add(sms);
+                    else
+                    {
+                        Utils.createXml(getBaseContext(), smsList, dayOfYear1);
+                        smsList.clear();
+                        dayOfYear1 = dayOfYear;
+                        smsList.add(sms);
+                    }
+                }while (c.moveToNext());
+                Utils.createXml(getBaseContext(), smsList, dayOfYear1);
+            }
+        }
+
+
+        if (v == btnLoad) {
+            /*
+            XMLParser parser = new XMLParser(Utils.SMSFolder, "SMSs.xml");
+            // Construct the data source
+            ArrayList<SMSData> smsList = parser.parseXMLfile();
+
+            Toast.makeText(getBaseContext(), "File Loaded", Toast.LENGTH_SHORT).show();
+
+            //Display SMS's
+
+            // Create the adapter to convert the array to views
+            SMSAdapter adapter1 = new SMSAdapter(this, smsList);
+
+            // Attach the adapter to a ListView
+            ListView lv = (ListView) findViewById(R.id.lvMsg);
+            lv.setAdapter(adapter1);
+            */
+/*
+            File folder = new File(Utils.SMSFolder);
+            File[] listOfFiles = folder.listFiles();
+
+            for (int i = 0; i < listOfFiles.length; i++) {
+                if (listOfFiles[i].isFile()) {
+                    Log.i("File ", listOfFiles[i].getName());
+                }
+            }
+*/
+
+            Intent intent = new Intent();
+            intent.setClass(this, FragmentLayout.class);
+            startActivity(intent);
+
+        }
+
+        if (v == btnCallLogs) {
+            // Create Draft box URI
+            Uri callsURI = CallLog.Calls.CONTENT_URI;
+
+            // List required columns
+            String[] reqCols = new String[]{"_id", CallLog.Calls.NUMBER, CallLog.Calls.TYPE, CallLog.Calls.DATE, CallLog.Calls.DURATION};
+
+            // Get Content Resolver object, which will deal with Content
+            // Provider
+            ContentResolver cr = getContentResolver();
+
+            // Fetch Sent SMS Message from Built-in Content Provider
+            Cursor c = cr.query(callsURI, reqCols, null, null, null);
+
+
+            // Attached Cursor with adapter and display in listview
+            adapter = new SimpleCursorAdapter(this, R.layout.row, c,
+                    new String[]{CallLog.Calls.NUMBER, CallLog.Calls.TYPE, CallLog.Calls.DATE, CallLog.Calls.DURATION}, new int[]{
+                    R.id.lblMsg, R.id.lblNumber, R.id.lbldate, R.id.lbltype}
+            );
+
+            Log.i("main", "chegou aqui?");
+
+            lvMsg.setAdapter(adapter);
+
+            Toast.makeText(this, "Calls Listed", Toast.LENGTH_SHORT).show();
+
+        }
+
+        if (v == btnCallLogsXML) {
+
+            String[] reqCols = new String[]{"_id", CallLog.Calls.NUMBER, CallLog.Calls.TYPE, CallLog.Calls.DATE, CallLog.Calls.DURATION};
+
+            Uri callsURI = CallLog.Calls.CONTENT_URI;
+
+            ContentResolver cr = getContentResolver();
+
+            Cursor c = cr.query(callsURI, reqCols, null, null, null);
+
+            if(c.moveToFirst()) {
+                Calendar date = Calendar.getInstance();
+                date.setTimeInMillis(Long.parseLong(c.getString(c.getColumnIndex("date"))));
+                String dayOfYear1 = date.get(Calendar.YEAR)+"-"+ (date.get(Calendar.MONTH)+1) +"-"+date.get(Calendar.DAY_OF_MONTH);
+                do
+                {
+                    int type = c.getInt(c.getColumnIndex(CallLog.Calls.TYPE));
+                    String number = c.getString(c.getColumnIndex(CallLog.Calls.NUMBER));
+                    date = Calendar.getInstance();
+                    date.setTimeInMillis(Long.parseLong(c.getString(c.getColumnIndex(CallLog.Calls.DATE))));
+                    String dayOfYear = date.get(Calendar.YEAR)+"-"+ (date.get(Calendar.MONTH)+1) +"-"+date.get(Calendar.DAY_OF_MONTH);
+                    String duration = c.getString(c.getColumnIndex(CallLog.Calls.DURATION));
+
+                    CallLogData callLog = new CallLogData(number, duration, date, type);
+                   // String p = Utils.getContactName(this, number);
+                    //if(p != null)
+                      //  callLog.setPerson(Utils.getContactName(this, number));
+                    if(dayOfYear.equals(dayOfYear1))
+                        callLogList.add(callLog);
+                    else
+                    {
+                        Utils.createCallLogXML(getBaseContext(), callLogList, dayOfYear1);
+                        callLogList.clear();
+                        dayOfYear1 = dayOfYear;
+                        callLogList.add(callLog);
+                    }
+                }while (c.moveToNext());
+                Utils.createCallLogXML(getBaseContext(), callLogList, dayOfYear1);
+            }
+        }
+
+
+        if (v == btnLoadCallLog) {
+           /* XMLParser parser = new XMLParser(Utils.CallLogFolder, "CallLogs.xml");
+            // Construct the data source
+            ArrayList<CallLogData> callLogList = parser.parseCallLogXML();
+
+            Toast.makeText(getBaseContext(), "File Loaded", Toast.LENGTH_SHORT).show();
+
+            // Create the adapter to convert the array to views
+            CallLogAdapter adapter1 = new CallLogAdapter(this, callLogList);
+
+            // Attach the adapter to a ListView
+            ListView lv = (ListView) findViewById(R.id.lvMsg);
+            lv.setAdapter(adapter1);*/
+
+            Intent intent2 = new Intent();
+            intent2.setClass(this, FragmentLayoutLogs.class);
+            startActivity(intent2);
+        }
+    }
+
+}

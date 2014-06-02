@@ -19,6 +19,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.vrs.smsapp.CallLogData;
 import com.vrs.smsapp.SMSData;
 
 import org.w3c.dom.*;
@@ -51,7 +52,8 @@ import javax.xml.transform.TransformerFactory;
  */
 public class Utils {
 
-    static final String mainFolder = "/CloudBackupFolder/";
+    public static final String SMSFolder = Environment.getExternalStorageDirectory()+"/CloudBackupFolder/SMSFolder/";
+    public static final String CallLogFolder = Environment.getExternalStorageDirectory()+"/CloudBackupFolder/CallLogFolder/";
 
     static public String getContactName(Context context, String phoneNumber) {
         ContentResolver cr = context.getContentResolver();
@@ -103,7 +105,7 @@ public class Utils {
         FileOutputStream fos = null;
 
         try {
-            final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + mainFolder );
+            final File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + SMSFolder );
 
             if (!dir.exists())
             {
@@ -180,9 +182,15 @@ public class Utils {
     }
 
 
-    static public void createXml(Context context, List<SMSData> smsList) {
+    static public void createXml(Context context, List<SMSData> smsList, String dayOfYear) {
         //create a new file called "new.xml" in the SD card
-        File newxmlfile = new File(Environment.getExternalStorageDirectory()+"/SMSs.xml");
+        final File dir = new File(SMSFolder );
+        if (!dir.exists())
+        {
+            dir.mkdirs();
+        }
+
+        File newxmlfile = new File(dir,"SMS-"+dayOfYear+".xml");
         try{
             newxmlfile.createNewFile();
         }catch(IOException e){
@@ -207,33 +215,35 @@ public class Utils {
             //start a tag called "root"
             serializer.startTag(null, "SMSRecord");
 
-            for(SMSData sms : smsList)
-            {
-                serializer.startTag(null, "SMS");
-                //i indent code just to have a view similar to xml-tree
-                serializer.startTag(null, "Type");
-                serializer.text(Integer.toString(sms.getType()));
-                serializer.endTag(null, "Type");
-/*
-                serializer.startTag(null, "Person");
-                serializer.text(sms.getPerson());
-                serializer.endTag(null, "Person");
-*/
-                serializer.startTag(null, "Number");
-                serializer.text(sms.getNumber());
-                serializer.endTag(null, "Number");
+            for(SMSData sms : smsList) {
+                if (sms.getNumber() != null && sms.getBody() != null) {
+                    serializer.startTag(null, "SMS");
+                    //i indent code just to have a view similar to xml-tree
+                    serializer.startTag(null, "Type");
+                    serializer.text(Integer.toString(sms.getType()));
+                    serializer.endTag(null, "Type");
 
-                serializer.startTag(null, "Date");
-                serializer.text(sms.getDate().toString());
-                serializer.endTag(null, "Date");
+                    if (sms.getPerson() != null) {
+                        serializer.startTag(null, "Person");
+                        serializer.text(sms.getPerson());
+                        serializer.endTag(null, "Person");
+                    }
 
-                serializer.startTag(null, "Body");
-                serializer.text(sms.getBody());
-                serializer.endTag(null, "Body");
+                    serializer.startTag(null, "Number");
+                    serializer.text(sms.getNumber());
+                    serializer.endTag(null, "Number");
 
-                serializer.endTag(null, "SMS");
+                    serializer.startTag(null, "Date");
+                    serializer.text(sms.getFormattedDate());
+                    serializer.endTag(null, "Date");
+
+                    serializer.startTag(null, "Body");
+                    serializer.text(sms.getBody());
+                    serializer.endTag(null, "Body");
+
+                    serializer.endTag(null, "SMS");
+                }
             }
-
             serializer.endTag(null, "SMSRecord");
 
             serializer.endDocument();
@@ -242,12 +252,92 @@ public class Utils {
             //finally we close the file stream
             fileos.close();
 
-            //TextView tv = (TextView)this.findViewById(R.id.result);
-            //tv.setText("file has been created on SD card");
-            Toast.makeText(context, "Done File created", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "SMS XML file created", Toast.LENGTH_LONG).show();
         } catch (Exception e) {
             Log.e("Exception","error occurred while creating xml file");
         }
+    }
+
+
+    static public void createCallLogXML(Context context, List<CallLogData> callLogList, String dayOfYear) {
+        //create a new file called "new.xml" in the SD card
+        final File dir = new File(CallLogFolder );
+        if (!dir.exists())
+        {
+            dir.mkdirs();
+        }
+
+        File newxmlfile = new File(dir, "CallLog-"+dayOfYear+".xml");
+        try{
+            newxmlfile.createNewFile();
+        }catch(IOException e){
+            Log.e("IOException", "exception in createNewFile() method");
+        }
+        //we have to bind the new file with a FileOutputStream
+        FileOutputStream fileos = null;
+        try{
+            fileos = new FileOutputStream(newxmlfile);
+        }catch(FileNotFoundException e){
+            Log.e("FileNotFoundException", "can't create FileOutputStream");
+        }
+        //we create a XmlSerializer in order to write xml data
+        XmlSerializer serializer = Xml.newSerializer();
+        try {
+            //we set the FileOutputStream as output for the serializer, using UTF-8 encoding
+            serializer.setOutput(fileos, "UTF-8");
+            //Write <?xml declaration with encoding (if encoding not null) and standalone flag (if standalone not null)
+            serializer.startDocument(null, Boolean.valueOf(true));
+            //set indentation option
+            serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+            //start a tag called "root"
+            serializer.startTag(null, "CallLogRecord");
+
+            for(CallLogData callLog : callLogList) {
+                if (callLog.getNumber() != null && callLog.getDuration() != null) {
+                    serializer.startTag(null, "CallLog");
+                    //i indent code just to have a view similar to xml-tree
+                    serializer.startTag(null, "Type");
+                    serializer.text(Integer.toString(callLog.getType()));
+                    serializer.endTag(null, "Type");
+
+                    if (callLog.getPerson() != null) {
+                        serializer.startTag(null, "Person");
+                        serializer.text(callLog.getPerson());
+                        serializer.endTag(null, "Person");
+                    }
+
+                    serializer.startTag(null, "Number");
+                    serializer.text(callLog.getNumber());
+                    serializer.endTag(null, "Number");
+
+                    serializer.startTag(null, "Date");
+                    serializer.text(callLog.getFormattedDate());
+                    serializer.endTag(null, "Date");
+
+                    serializer.startTag(null, "Duration");
+                    serializer.text(callLog.getDuration());
+                    serializer.endTag(null, "Duration");
+
+                    serializer.endTag(null, "CallLog");
+                }
+            }
+            serializer.endTag(null, "CallLogRecord");
+
+            serializer.endDocument();
+            //write xml data into the FileOutputStream
+            serializer.flush();
+            //finally we close the file stream
+            fileos.close();
+
+            Toast.makeText(context, "Call Log XML file created", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Log.e("Exception","error occurred while creating xml file");
+        }
+    }
+
+    public static void showToast(Context context, String msg)
+    {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT);
     }
 
 }

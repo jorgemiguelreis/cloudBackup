@@ -1,3 +1,4 @@
+
 package com.vrs.smsapp;
 
 import com.vrs.utils.Utils;
@@ -7,24 +8,25 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by Miao on 29/05/2014.
- */
 public class SMSData {
+
+    //public enum smsType {RECEBIDA, ENVIADA};
 
     // Number from witch the sms was send
     private String number;
     // SMS text body
     private String body;
 
-    //static SimpleDateFormat FORMATTER = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
+    static SimpleDateFormat FORMATTER = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss");
 
     private Calendar date;
+    private String dateString;
 
     private int type;
 
     private String person;
 
+    public SMSData() {}
     public SMSData(String number, String body, Calendar date, int type)
     {
         this.number = number;
@@ -37,6 +39,16 @@ public class SMSData {
         return type;
     }
 
+    public String getTypeFormatted()
+    {
+        if(type == 1)
+            return "Inbox";
+        else if(type == 2)
+            return "Sent";
+        else
+            return "Draft";
+    }
+
     public String getNumber() {
         return number;
     }
@@ -47,6 +59,14 @@ public class SMSData {
 
     public Calendar getDate() {
         return date;
+    }
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public String getFormattedDate() {
+        return FORMATTER.format(date.getTime());
     }
 
     public String getBody() {
@@ -67,6 +87,10 @@ public class SMSData {
 
     public void setDate(Calendar date) {
         this.date = date;
+    }
+
+    public void setDateString(String date) {
+        this.dateString = date;
     }
 
     public void setBody(String body) {
@@ -106,3 +130,4 @@ public class SMSData {
     }
 */
 }
+
