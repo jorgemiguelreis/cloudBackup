@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="Serviços" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefDropbox"
+            android:summary="Realizar backup para Dropbox"
+            android:title="Dropbox" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefGDrive"
+            android:summary="Reaizar backup para Google Drive"
+            android:title="Google Drive" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="prefSync"
+            android:summary="Manter as duas Clouds Sincronizadas"
+            android:title="Sincronização" >
+        </CheckBoxPreference>
+    </PreferenceCategory>
+     
+    <PreferenceCategory android:title="Backups" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="prefsms"
+            android:summary="Backup das SMS"
+            android:title="SMS" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="preflogs"
+            android:summary="Backup do Registos de Chamadas"
+            android:title="Registos de Chamadas" >
+        </CheckBoxPreference>
+
+        
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="Agendamento" >
+        <ListPreference
+            android:key="prefUploadFrequency"
+            android:title="Frequência de Upload"
+            android:summary="Definir frequência de upload"
+            android:entries="@array/uploadFrequency"
+            android:entryValues="@array/uploadFrequencyValues"
+            />
+        </PreferenceCategory>
+
+</PreferenceScreen>
